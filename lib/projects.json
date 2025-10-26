@@ -2,7 +2,7 @@
     {
         "title": "Python + MySQL sleeptracker",
         "year": "2023",
-        "image": "../images/sleeptracker.png",
+        "image": "https://dhrutube.github.io/portfolio/images/sleeptracker.png",
         "description": "A MySQL database that stores user sleep data and uses Python for the menu interface."
     },
     {
@@ -14,7 +14,7 @@
     {
         "title": "DSC 106 Project 1",
         "year": "2022",
-        "image": "../images/dsc 106 project 1.png",
+        "image": "https://dhrutube.github.io/portfolio/images/dsc 106 project 1.png",
         "description": "How cost changes as food is more processed, according to NOVA categories."
     },
     {
