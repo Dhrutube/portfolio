@@ -39,6 +39,28 @@ nav a {
   padding-bottom: 0.8em;
 }
 
+#profile-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  margin-bottom: 2em;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  padding: 0.5em;
+}
+
+dt {
+  grid-row: 1;
+}
+
+dd {
+  grid-row: 2;
+}
+
 article a {
   flex: 1;
   text-decoration: none;

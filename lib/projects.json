@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Python + MySQL sleeptracker",
+        "year": "2023",
+        "image": "../images/sleeptracker.png",
+        "description": "A MySQL database that stores user sleep data and uses Python for the menu interface."
+    },
+    {
+        "title": "DSC 106 Lab 3",
+        "year": "2025",
+        "image": "https://dsc106.com/labs/lab03/images/contact-works.png",
+        "description": "Adding CSS and JavaScript to make my personal website interactive."
+    },
+    {
+        "title": "DSC 106 Project 1",
+        "year": "2022",
+        "image": "../images/dsc 106 project 1.png",
+        "description": "The cost of food processing according to NOVA categories."
+    },
+    {
+        "title": "DSC 106 Lab 1",
+        "year": "2024",
+        "image": "https://dsc106.com/labs/lab01/images/screenshots/jie-step7.png",
+        "description": "Building a personal website using only HTML."
+    },
+    {
+        "title": "DSC 106 Lab 2",
+        "year": "2025",
+        "image": "https://dsc106.com/labs/lab02/images/step3-2.png",
+        "description": "Adding CSS to the personal website."
+    },
+    {
+        "title": "DSC 106 Project 2",
+        "year": "2021",
+        "image": "../images/dsc 106 proj 2.png",
+        "description": "EDA of New York police officers."
+    },
+    {
+        "title": "Sentiment Analyzer",
+        "year": "2018",
+        "image": "https://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/lcd_i2c_screen_01.jpg",
+        "description": "A sentiment analyzer using Python running on a Raspberry Pi Zero."
+    },
+    {
+        "title": "Power Outages",
+        "year": "2019",
+        "image": "https://stories.tamu.edu/wp-content/uploads/2025/08/PowerOutage-2400x1350.jpg",
+        "description": "EDA of power outages across the United States."
+    },
+    {
+        "title": "Alias neque autem expedita!",
+        "year": "2022",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Doloribus vero repudiandae assumenda facere voluptatem possimus nobis. Voluptates saepe debitis quod nobis, ea corrupti libero laborum deserunt eius praesentium, amet eveniet minus consectetur nihil dolore? Deleniti eveniet voluptatem quasi."
+    },
+    {
+        "title": "Officiis minus accusantium iusto.",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Cumque doloremque consequatur adipisci impedit ratione rerum accusamus esse hic consequuntur veniam sit suscipit laudantium nostrum ullam totam quas autem eum quod, debitis tempore sapiente dolor aspernatur vitae. Obcaecati, a."
+    },
+    {
+        "title": "Sint maiores officia dolorum.",
+        "year": "2020",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Vero, dicta? Animi mollitia, sit blanditiis itaque sequi eos maiores sunt labore cum voluptate dicta ut quos accusantium pariatur ipsum natus ratione voluptatibus! Et hic vero quasi eaque nam delectus?"
+    },
+    {
+        "title": "Ducimus libero eligendi vel.",
+        "year": "2020",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Veniam quia maxime nulla quaerat, sunt debitis ab vitae explicabo voluptatem. Tempora optio quisquam atque velit, saepe eius inventore voluptas autem molestiae eos obcaecati blanditiis, iusto fugit nemo corrupti magni?"
+    }
+]
