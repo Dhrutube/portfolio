@@ -37,13 +37,13 @@
     },
     {
         "title": "Sentiment Analyzer",
-        "year": "2018",
+        "year": "2023",
         "image": "https://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/lcd_i2c_screen_01.jpg",
         "description": "A sentiment analyzer using Python running on a Raspberry Pi Zero."
     },
     {
         "title": "Power Outages",
-        "year": "2019",
+        "year": "2022",
         "image": "https://stories.tamu.edu/wp-content/uploads/2025/08/PowerOutage-2400x1350.jpg",
         "description": "EDA of power outages across the United States."
     },

@@ -15,7 +15,7 @@ body {
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
-    max-width: 80ch;
+    max-width: 90ch;
     margin-inline: auto;
     padding-inline: 2ch;
   }
@@ -120,4 +120,67 @@ h2 {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  flex: 1;
+  gap: 1em;
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.swatch {
+  display: inline-block;
+  width: 1em;
+  aspect-ratio: 1;
+  border-radius: 25%;
+  align-items: center;
+}
+
+input.searchBar {
+  width: 95%;
+  margin: auto;
+  margin: 1em;
+  padding: 0.5em;
+  font-size: 1.3em;
+}
+
+/* We use 'has' here so that when no wedges are being hovered over, none are faded */
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
 }
