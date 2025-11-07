@@ -5,6 +5,8 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 let projects = await fetchJSON('../lib/projects.json'); //fetch your project data
 
 const projectsContainer = document.querySelector('.projects');
+let selectedIndex = -1 // indicates no index
+let Colors = d3.scaleOrdinal(d3.schemeTableau10);
 renderProjects(projects, projectsContainer, 'h2');
 renderPieChart(projects);
 
@@ -12,23 +14,21 @@ const h1 = document.querySelector('.projects-title');
 h1.textContent = `${projects.length} Projects`;
 
 function renderPieChart(projectsGiven) {
-    let newColors = d3.scaleOrdinal(d3.schemeTableau10);
-
-    let newRolledData = d3.rollups(
+    let RolledData = d3.rollups(
         projectsGiven,
         (v) => v.length,
         (d) => d.year,
     );
 
-    let newData = newRolledData.map(([year, count]) => {
+    let Data = RolledData.map(([year, count]) => {
         return { value: count, label: year };
     });
 
 
-    let newSliceGenerator = d3.pie().value((d) => d.value);
-    let newArcData = newSliceGenerator(newData);
+    let SliceGenerator = d3.pie().value((d) => d.value);
+    let ArcData = SliceGenerator(Data);
     let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-    let newArcs = newArcData.map((d) => arcGenerator(d));
+    let Arcs = ArcData.map((d) => arcGenerator(d));
 
     // clearing up paths and legends
     let currSVG = d3.select('svg');
@@ -36,58 +36,50 @@ function renderPieChart(projectsGiven) {
     let currLegend = d3.select('.legend');
     currLegend.selectAll('li').remove()
 
-    newArcs.forEach((arc, idx) => {
+
+
+    Arcs.forEach((arc, idx) => {
         d3.select('svg').append('path').attr('d', arc)
-        // .attr('fill', colors[idx]);
-        .attr('fill', newColors(idx));   // changing to (idx) from [idx] since colors is now a func()
+        .attr('fill', Colors(idx))   // changing to (idx) from [idx] since colors is now a func()
+        .on('click', () => {
+            selectedIndex = selectedIndex === idx ? -1 : idx;
+            currSVG
+            .selectAll('path')
+            .attr('class', (_, idx) => (
+            // 'selected' is the CSS class applied to the selected pie slice for highlighting.
+            idx === selectedIndex ? 'selected' : null
+            ));
+
+            currLegend
+            .selectAll('li')
+            .attr('class', (_, idx) => (
+            // 'selected' is the CSS class that highlights the currently selected legend item (and pie slice) by index.
+            // using '' instead of null since '.legend-item null' is not a class
+            // 
+            // idx === selectedIndex ? 'selected' : ''
+            `legend-item${idx === selectedIndex ? ' selected' : ''}`
+            ));
+
+            if (selectedIndex === -1) {
+                renderProjects(projects, projectsContainer, 'h2');
+              } else {
+                // TODO: filter projects and project them onto webpage
+                // Hint: `.label` might be useful
+                const selectedYear = Data[selectedIndex].label;
+                const filtered = projects.filter(p => p.year === selectedYear);
+                renderProjects(filtered, projectsContainer, 'h2');
+              }
+          });
     });
 
     // adding a legend
-    let newLegend = d3.select('.legend');
-    newData.forEach((d, idx) => {
-    newLegend
+    Data.forEach((d, idx) => {
+    currLegend
         .append('li')
         .attr('class', 'legend-item')
         .html(
-        `<span class="swatch" style="background:${newColors(idx)}"></span> ${d.label} <em>(${d.value})</em>`
+        `<span class="swatch" style="background:${Colors(idx)}"></span> ${d.label} <em>(${d.value})</em>`
         );
-    });
-
-    let selectedIndex = -1;   // convention for no index
-    let svg = d3.select('svg');
-    svg.selectAll('path').remove();
-    arcs.forEach((arc, i) => {
-    svg
-        .append('path')
-        .attr('d', arc)
-        .attr('fill', newColors(i))
-        .on('click', () => {
-            // What should we do? (Keep scrolling to find out!)
-            selectedIndex = selectedIndex === i ? -1 : i;
-
-            svg
-                .selectAll('path')
-                .attr('class', (_, idx) => (
-                // TODO: filter idx to find correct pie slice and apply CSS from above
-                idx === selectedIndex ? 'selected' : null
-                ));
-            
-            legend
-                .selectAll('li')
-                .attr('class', (_, idx) => (
-                    // TODO: filter idx to find correct legend and apply CSS from above         
-                idx === selectedIndex ? 'selected' : null
-                ));
-        });  
-        if (selectedIndex === -1) {
-            renderProjects(projects, projectsContainer, 'h2');
-          } else {
-            // TODO: filter projects and project them onto webpage
-            // Hint: `.label` might be useful
-            let selectedLabel = newData[selectedIndex].label;  // newData should be in scope
-            let filteredProjects = projects.filter(p => p.year === selectedLabel);
-            renderProjects(filteredProjects, projectsContainer, 'h2');
-          }
     });
 }
 
