@@ -184,3 +184,7 @@ path {
     fill: var(--color);
   }
 }
+
+.legend-item.selected .swatch {
+  background-color: oklch(60% 45% 0) !important; 
+}

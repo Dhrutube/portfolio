@@ -1,14 +1,13 @@
 import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-// const projects = await fetchJSON('../lib/projects.json');
 let projects = await fetchJSON('../lib/projects.json'); //fetch your project data
 
 const projectsContainer = document.querySelector('.projects');
 let selectedIndex = -1 // indicates no index
 let Colors = d3.scaleOrdinal(d3.schemeTableau10);
 renderProjects(projects, projectsContainer, 'h2');
-renderPieChart(projects);
+
 
 const h1 = document.querySelector('.projects-title');
 h1.textContent = `${projects.length} Projects`;
@@ -39,7 +38,7 @@ function renderPieChart(projectsGiven) {
 
 
     Arcs.forEach((arc, idx) => {
-        d3.select('svg').append('path').attr('d', arc)
+        currSVG.append('path').attr('d', arc)
         .attr('fill', Colors(idx))   // changing to (idx) from [idx] since colors is now a func()
         .on('click', () => {
             selectedIndex = selectedIndex === idx ? -1 : idx;
@@ -78,11 +77,12 @@ function renderPieChart(projectsGiven) {
         .append('li')
         .attr('class', 'legend-item')
         .html(
-        `<span class="swatch" style="background:${Colors(idx)}"></span> ${d.label} <em>(${d.value})</em>`
+        `<span class="swatch" style="background-color:${Colors(idx)}"></span> ${d.label} <em>(${d.value})</em>`
         );
     });
 }
 
+renderPieChart(projects);
 
 let query = '';
 let searchInput = document.querySelector('.searchBar');
