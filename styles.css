@@ -226,8 +226,8 @@ dl.info dd {
   top: 1em;
   left: 1em;
   background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 5px 5px 5px black;
-  border-radius: 0.25em;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 0.45em;
   padding: 1ch;
 }
 
