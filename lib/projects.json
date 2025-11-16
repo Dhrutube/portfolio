@@ -48,10 +48,10 @@
         "description": "EDA of power outages across the United States."
     },
     {
-        "title": "Alias neque autem expedita!",
-        "year": "2022",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Doloribus vero repudiandae assumenda facere voluptatem possimus nobis. Voluptates saepe debitis quod nobis, ea corrupti libero laborum deserunt eius praesentium, amet eveniet minus consectetur nihil dolore? Deleniti eveniet voluptatem quasi."
+        "title": "Boston Biketracker",
+        "year": "2025",
+        "image": "../images/boston-bike.png",
+        "description": "A simple project that tracks Boston and Cambridge bike routes using BlueBike stations."
     },
     {
         "title": "Officiis minus accusantium iusto.",
