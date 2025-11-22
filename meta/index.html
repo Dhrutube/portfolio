@@ -8,31 +8,48 @@
 </head>
 <body>
     <script src="main.js" type="module"></script>
+
+    <label>
+        Show commits until:
+        <input type="range" id="commit-progress" min="0" max="100">
+        <time id="commit-time"></time>
+    </label>
+
+    <dl id="files">
+        <!-- we want the following structure for each file:
+        <div>
+            <dt>
+            <code>{file.name}</code>
+            </dt>
+            <dd>{file.lines.length} lines</dd>
+        </div>
+        -->
+    </dl>
+
     <div id="stats"></div>
 
     <h2>Commits by time of day</h2>
-    <div id="chart"></div>
-
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd>
-            <a href="" id="commit-link" target="_blank"></a>
-        </dd>
-        
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-        
-        <dt>Time</dt>
-        <dd id="commit-time"></dd>
-
-        <dt>Author</dt>
-        <dd id="commit-author"></dd>
-
-        <dt>Lines Edited</dt>
-        <dd id="commit-lines"></dd>
-    </dl>
-
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>
+    <div id="scrolly-1">
+        <div id="scatter-story">Telling a story...</div>
+        <div id="scatter-plot">
+            <div id="chart"></div>
+            <dl id="commit-tooltip" class="info tooltip" hidden>
+                <dt>Commit</dt>
+                <dd>
+                    <a href="" id="commit-link" target="_blank"></a>
+                </dd>
+    
+                <dt>Date</dt>
+                <dd id="commit-date"></dd>
+    
+                <!-- Add: Time, author, lines edited -->
+            </dl>
+        </div>
+        </div>
+    
+    
+        <p id="selection-count">No commits selected</p>
+        <dl id="language-breakdown" class="stats"></dl>
+        <dl id="files"></dl>
 </body>
 </html>
