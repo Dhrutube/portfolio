@@ -388,82 +388,12 @@ renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
 
   
-let commitProgress = 100;
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, (d) => d.datetime),
-    d3.max(commits, (d) => d.datetime),
-  ])
-  .range([0, 100]);
 
-function onTimeSliderChange() {
-  const slider = document.getElementById('commit-progress');
-  const timeElement = document.getElementById('commit-time');
-  
-  // Update commitProgress and calculate the commit date
-  commitProgress = slider.value;
-  const commitMaxTime = timeScale.invert(commitProgress);
-  
-  // Format and display the date
-  const formattedDate = commitMaxTime.toLocaleString('en-US', {
-    dateStyle: 'long',
-    timeStyle: 'short'
-  });
-  
-  timeElement.textContent = formattedDate;
-  timeElement.dateTime = commitMaxTime.toISOString();
-  
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
-}
-
-// Attach event listener to the slider
-document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
-
-// Initialize on page load
-onTimeSliderChange();
-
-const scroller = scrollama();
-
-function onStepEnter(response) {
-  // D3 binds data to the element property __data__
-  const commit = response.element.__data__;
-  
-  if (commit) {
-    const filteredCommits = commits.filter((d) => d.datetime <= commit.datetime);
-    
-    updateScatterPlot(filteredCommits);
-    updateFileDisplay(filteredCommits);
-
-    const slider = document.getElementById('commit-progress');
-    const timeElement = document.getElementById('commit-time');
-    
-    if (slider && timeScale) {
-      // Invert the logic: Date -> Slider Value (0-100)
-      slider.value = timeScale(commit.datetime);
-      
-      // Update the time text
-      timeElement.textContent = commit.datetime.toLocaleString('en-US', {
-        dateStyle: 'long',
-        timeStyle: 'short',
-      });
-    }
-  }
-}
-
-function updateSteps() {
-  // Get the slider value
-  const slider = document.getElementById('commit-progress');
-  const limit = Number(slider.value);
-
-  // Show only the steps up to the slider position
-  const visibleCommits = commits.slice(0, limit);
+updateFileDisplay(filteredCommits);
 
 d3.select('#scatter-story')
   .selectAll('.step')
-  .data(commits)
+  .data(d3.sort(commits, (d) => d.datetime))
   .join('div')
   .attr('class', 'step')
   .html(
@@ -473,7 +403,7 @@ d3.select('#scatter-story')
       timeStyle: 'short',
     })},
 		I made <a href="${d.url}" target="_blank">${
-      i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+      i > 0 ? 'another commit' : 'my first commit'
     }</a>.
 		I edited ${d.totalLines} lines across ${
       d3.rollups(
@@ -482,21 +412,20 @@ d3.select('#scatter-story')
         (d) => d.file,
       ).length
     } files.
-		Then I looked over all I had made, and I saw that it was very good.
 	`,
   );
 
-  scroller
-  .setup({
-    container: '#scrolly-1', // Make sure this ID exists in your HTML container
-    step: '.step', // Target the steps you created with D3
-    offset: 0.5, // Trigger when the element hits the middle of the screen
-    debug: false, // Set to true to see the trigger line
-  })
-  .onStepEnter(onStepEnter);
+function onStepEnter(response) {
+  const commit = response.element.__data__;
+  const t = commit.datetime;
+  const filteredCommits = commits.filter(d => d.datetime <= t);
+  updateScatterPlot(data, filteredCommits);
 }
 
-// Update steps every time the slider changes
-document.getElementById('commit-progress').addEventListener('input', updateSteps);
-
-updateSteps();
+const scroller = scrollama();
+scroller
+  .setup({
+    container: '#scrolly-1',
+    step: '#scrolly-1 .step',
+  })
+  .onStepEnter(onStepEnter);
